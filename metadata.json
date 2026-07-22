@@ -1,0 +1,6 @@
+{
+  "name": "Paud Pandit",
+  "description": "AI Plant Doctor & Nursery App - Diagnose plant diseases, buy plants, track garden care, and get expert gardening advice.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
