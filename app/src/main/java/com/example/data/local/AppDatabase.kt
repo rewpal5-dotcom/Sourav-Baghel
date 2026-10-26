@@ -6,8 +6,13 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(
-    entities = [PlantEntity::class, GardenPlantEntity::class, ScanHistoryEntity::class],
-    version = 1,
+    entities = [
+        PlantEntity::class,
+        GardenPlantEntity::class,
+        ScanHistoryEntity::class,
+        OrderEntity::class
+    ],
+    version = 2,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {

@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.data.local.AppDatabase
 import com.example.data.local.GardenPlantEntity
+import com.example.data.local.OrderEntity
 import com.example.data.local.PlantEntity
 import com.example.data.local.ScanHistoryEntity
 import com.example.data.remote.ChatMessage
@@ -39,6 +40,7 @@ class PlantViewModel(application: Application) : AndroidViewModel(application) {
     val nurseryPlants: StateFlow<List<PlantEntity>>
     val gardenPlants: StateFlow<List<GardenPlantEntity>>
     val scanHistory: StateFlow<List<ScanHistoryEntity>>
+    val orders: StateFlow<List<OrderEntity>>
 
     val cartItems = MutableStateFlow<List<CartItem>>(emptyList())
     val diagnosisState = MutableStateFlow<DiagnosisUiState>(DiagnosisUiState.Idle)
@@ -93,6 +95,12 @@ class PlantViewModel(application: Application) : AndroidViewModel(application) {
             started = SharingStarted.WhileSubscribed(5000),
             initialValue = emptyList()
         )
+
+        orders = repository.orders.stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = emptyList()
+        )
     }
 
     fun toggleFavorite(plant: PlantEntity) {
@@ -119,6 +127,37 @@ class PlantViewModel(application: Application) : AndroidViewModel(application) {
 
     fun clearCart() {
         cartItems.value = emptyList()
+    }
+
+    /** Saves the current cart as a real order row in the local database. */
+    fun placeOrder(
+        orderCode: String,
+        address: String,
+        phone: String,
+        paymentMode: String,
+        status: String
+    ) {
+        val items = cartItems.value
+        if (items.isEmpty()) return
+
+        val subtotal = items.sumOf { it.plant.price * it.quantity }
+        val deliveryFee = if (subtotal > 499) 0.0 else 49.0
+        val total = subtotal + deliveryFee
+        val summary = items.joinToString(", ") { "${it.plant.name} x${it.quantity}" }
+        val count = items.sumOf { it.quantity }
+
+        viewModelScope.launch {
+            repository.placeOrder(
+                orderCode = orderCode,
+                itemsSummary = summary,
+                itemCount = count,
+                amount = total,
+                address = address,
+                phone = phone,
+                paymentMode = paymentMode,
+                status = status
+            )
+        }
     }
 
     fun updateCartQuantity(plantId: Int, delta: Int) {
@@ -187,7 +226,11 @@ class PlantViewModel(application: Application) : AndroidViewModel(application) {
                 val botMsg = ChatMessage(message = replyText, isUser = false)
                 chatMessages.value = chatMessages.value + botMsg
             } catch (e: Exception) {
-                val botMsg = ChatMessage(message = "Apologies, I couldn't process that right now. Please check your connection and try again!", isUser = false)
+                val botMsg = ChatMessage(
+                    message = e.message
+                        ?: "AI se jawab nahi aaya. Internet check karke dobara try karein.",
+                    isUser = false
+                )
                 chatMessages.value = chatMessages.value + botMsg
             } finally {
                 isChatLoading.value = false

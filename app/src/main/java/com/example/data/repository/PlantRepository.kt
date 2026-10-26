@@ -1,6 +1,7 @@
 package com.example.data.repository
 
 import com.example.data.local.GardenPlantEntity
+import com.example.data.local.OrderEntity
 import com.example.data.local.PlantDao
 import com.example.data.local.PlantEntity
 import com.example.data.local.ScanHistoryEntity
@@ -16,6 +17,7 @@ class PlantRepository(private val plantDao: PlantDao) {
     val popularPlants: Flow<List<PlantEntity>> = plantDao.getPopularPlants()
     val gardenPlants: Flow<List<GardenPlantEntity>> = plantDao.getAllGardenPlants()
     val scanHistory: Flow<List<ScanHistoryEntity>> = plantDao.getScanHistory()
+    val orders: Flow<List<OrderEntity>> = plantDao.getAllOrders()
 
     suspend fun prepopulateNurseryIfEmpty() {
         val currentPlants = plantDao.getAllNurseryPlants().first()
@@ -191,6 +193,30 @@ class PlantRepository(private val plantDao: PlantDao) {
 
     suspend fun deleteGardenPlant(id: Int) {
         plantDao.deleteGardenPlant(id)
+    }
+
+    suspend fun placeOrder(
+        orderCode: String,
+        itemsSummary: String,
+        itemCount: Int,
+        amount: Double,
+        address: String,
+        phone: String,
+        paymentMode: String,
+        status: String
+    ) {
+        plantDao.insertOrder(
+            OrderEntity(
+                orderCode = orderCode,
+                itemsSummary = itemsSummary,
+                itemCount = itemCount,
+                amount = amount,
+                address = address,
+                phone = phone,
+                paymentMode = paymentMode,
+                status = status
+            )
+        )
     }
 
     suspend fun runDiagnosis(

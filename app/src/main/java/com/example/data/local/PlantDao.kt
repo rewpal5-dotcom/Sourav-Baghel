@@ -44,4 +44,11 @@ interface PlantDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertScanHistory(scan: ScanHistoryEntity)
+
+    // Order Queries
+    @Query("SELECT * FROM orders ORDER BY id DESC")
+    fun getAllOrders(): Flow<List<OrderEntity>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertOrder(order: OrderEntity)
 }
