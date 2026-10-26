@@ -54,6 +54,7 @@ fun PaudPanditApp(viewModel: PlantViewModel = viewModel()) {
     val nurseryPlants by viewModel.nurseryPlants.collectAsStateWithLifecycle()
     val gardenPlants by viewModel.gardenPlants.collectAsStateWithLifecycle()
     val scanHistory by viewModel.scanHistory.collectAsStateWithLifecycle()
+    val orders by viewModel.orders.collectAsStateWithLifecycle()
     val searchQuery by viewModel.searchQuery.collectAsStateWithLifecycle()
     val selectedCategory by viewModel.selectedCategory.collectAsStateWithLifecycle()
     val cartItems by viewModel.cartItems.collectAsStateWithLifecycle()
@@ -117,6 +118,7 @@ fun PaudPanditApp(viewModel: PlantViewModel = viewModel()) {
                 NavigationTab.NURSERY -> NurseryScreen(
                     nurseryPlants = nurseryPlants,
                     cartItems = cartItems,
+                    orders = orders,
                     searchQuery = searchQuery,
                     onSearchQueryChange = { viewModel.searchQuery.value = it },
                     selectedCategory = selectedCategory,
@@ -161,6 +163,9 @@ fun PaudPanditApp(viewModel: PlantViewModel = viewModel()) {
             onUpdateQuantity = { plantId, delta -> viewModel.updateCartQuantity(plantId, delta) },
             onRemoveItem = { plantId -> viewModel.removeFromCart(plantId) },
             onClearCart = { viewModel.clearCart() },
+            onPlaceOrder = { orderCode, address, phone, paymentMode, status ->
+                viewModel.placeOrder(orderCode, address, phone, paymentMode, status)
+            },
             onDismiss = { showCartSheet = false }
         )
     }

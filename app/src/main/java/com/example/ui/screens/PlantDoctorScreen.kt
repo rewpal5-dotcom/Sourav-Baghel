@@ -438,6 +438,47 @@ fun PlantDoctorScreen(
 
             Spacer(modifier = Modifier.height(20.dp))
 
+            // Diagnosis Error View — shows the real reason instead of failing silently
+            if (diagnosisState is DiagnosisUiState.Error) {
+                Card(
+                    shape = RoundedCornerShape(16.dp),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.errorContainer
+                    ),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .testTag("diagnosis_error_card")
+                ) {
+                    Column(modifier = Modifier.padding(16.dp)) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Icon(
+                                imageVector = Icons.Default.Close,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.onErrorContainer
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(
+                                text = "Diagnosis nahi ho payi",
+                                style = MaterialTheme.typography.titleMedium,
+                                fontWeight = FontWeight.Bold,
+                                color = MaterialTheme.colorScheme.onErrorContainer
+                            )
+                        }
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text(
+                            text = diagnosisState.message,
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onErrorContainer
+                        )
+                        Spacer(modifier = Modifier.height(4.dp))
+                        TextButton(onClick = onResetState) {
+                            Text("Theek hai")
+                        }
+                    }
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+            }
+
             // Diagnosis Result View
             AnimatedVisibility(visible = diagnosisState is DiagnosisUiState.Success) {
                 if (diagnosisState is DiagnosisUiState.Success) {

@@ -9,17 +9,24 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LocalFlorist
+import androidx.compose.material.icons.filled.ReceiptLong
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.example.data.local.OrderEntity
 import com.example.data.local.PlantEntity
+import com.example.ui.components.OrdersDialog
 import com.example.ui.components.PlantCard
 import com.example.ui.viewmodel.CartItem
 
@@ -28,6 +35,7 @@ import com.example.ui.viewmodel.CartItem
 fun NurseryScreen(
     nurseryPlants: List<PlantEntity>,
     cartItems: List<CartItem>,
+    orders: List<OrderEntity>,
     searchQuery: String,
     onSearchQueryChange: (String) -> Unit,
     selectedCategory: String,
@@ -39,6 +47,7 @@ fun NurseryScreen(
 ) {
     val categories = listOf("All", "Indoor", "Air Purifying", "Flowering", "Medicinal", "Succulent")
     val cartCount = cartItems.sumOf { it.quantity }
+    var showOrders by remember { mutableStateOf(false) }
 
     Scaffold(
         topBar = {
@@ -55,6 +64,13 @@ fun NurseryScreen(
                     }
                 },
                 actions = {
+                    IconButton(onClick = { showOrders = true }) {
+                        Icon(
+                            imageVector = Icons.Default.ReceiptLong,
+                            contentDescription = "Mere Orders",
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                    }
                     BadgedBox(
                         badge = {
                             if (cartCount > 0) {
@@ -157,5 +173,9 @@ fun NurseryScreen(
                 }
             }
         }
+    }
+
+    if (showOrders) {
+        OrdersDialog(orders = orders, onDismiss = { showOrders = false })
     }
 }
