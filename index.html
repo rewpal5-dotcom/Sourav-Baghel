@@ -1,126 +1,233 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Paud Pandit — AI Plant Doctor &amp; Nursery</title>
-<meta name="description" content="Paud Pandit is an Android app that diagnoses plant diseases from a leaf photo, sells plants and pots, and tracks your garden care schedule. In Hindi and English.">
+<title>Paud Pandit — AI Plant Doctor &amp; Nursery App</title>
+<meta name="description" content="Paud Pandit: patte ki photo se AI plant disease diagnosis, nursery se paudhe kharido, aur Mera Bagicha mein care schedule sambhalo. Android app, Hindi + English.">
+<meta name="theme-color" content="#0d2b1a">
 <meta property="og:title" content="Paud Pandit — AI Plant Doctor &amp; Nursery">
-<meta property="og:description" content="Snap a leaf, get an AI diagnosis, buy healthy plants and track your mera bagicha.">
+<meta property="og:description" content="Snap a leaf → AI diagnosis → paudha kharido aur care schedule banao. Ek app mein doctor, nursery aur mali.">
 <meta property="og:image" content="https://raw.githubusercontent.com/rewpal5-dotcom/Sourav-Baghel/main/app/src/main/res/drawable/img_plant_hero.jpg">
 <meta property="og:type" content="website">
 <link rel="icon" href="https://raw.githubusercontent.com/rewpal5-dotcom/Sourav-Baghel/main/app/src/main/res/drawable/img_paud_pandit_icon.jpg">
 <style>
   :root{
-    --green-900:#12351f;
-    --green-800:#1b4d2c;
-    --green-700:#256b3c;
-    --green-500:#3f9d5c;
-    --green-200:#cfe8d7;
-    --green-50:#f2f9f4;
-    --earth:#8a5a3b;
-    --ink:#14231a;
-    --muted:#5a6b60;
-    --card:#ffffff;
-    --line:#e2ece5;
-    --radius:18px;
-    --shadow:0 10px 30px rgba(18,53,31,.08);
+    --ink:#0f1d14;
+    --forest:#0d2b1a;
+    --forest-2:#123a24;
+    --leaf:#2f7d4f;
+    --leaf-2:#3f9d5c;
+    --lime:#b8e986;
+    --cream:#f7f5ef;
+    --paper:#ffffff;
+    --muted:#5b6b60;
+    --line:#e6e3d9;
+    --gold:#c98a2e;
+    --r-lg:24px;
+    --r-md:16px;
+    --shadow-sm:0 2px 8px rgba(15,29,20,.06);
+    --shadow-md:0 14px 40px rgba(15,29,20,.10);
+    --shadow-lg:0 30px 80px rgba(13,43,26,.28);
+    --max:1160px;
   }
   *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
   body{
-    margin:0;background:var(--green-50);color:var(--ink);
+    margin:0;background:var(--cream);color:var(--ink);
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans","Helvetica Neue",Arial,sans-serif;
-    line-height:1.6;-webkit-font-smoothing:antialiased;
+    font-size:16.5px;line-height:1.65;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
   }
   img{max-width:100%;display:block}
-  .wrap{width:min(1120px,92vw);margin-inline:auto}
-  a{color:var(--green-700)}
+  a{color:var(--leaf)}
+  .wrap{width:min(var(--max),91vw);margin-inline:auto}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 
-  /* header */
-  header{position:sticky;top:0;z-index:20;background:rgba(242,249,244,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-  .nav{display:flex;align-items:center;gap:14px;padding:12px 0}
-  .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.2px;text-decoration:none;color:var(--green-900)}
-  .brand img{width:34px;height:34px;border-radius:9px;object-fit:cover}
-  .nav nav{margin-left:auto;display:flex;gap:22px;font-size:.94rem}
-  .nav nav a{text-decoration:none;color:var(--muted)}
-  .nav nav a:hover{color:var(--green-800)}
-  @media(max-width:720px){.nav nav{display:none}}
+  /* ---------- nav ---------- */
+  header{position:sticky;top:0;z-index:50;background:rgba(247,245,239,.82);backdrop-filter:saturate(140%) blur(14px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;gap:12px;height:66px}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--forest);font-weight:750;letter-spacing:-.3px}
+  .brand img{width:34px;height:34px;border-radius:10px;object-fit:cover;box-shadow:var(--shadow-sm)}
+  .nav-links{margin-left:auto;display:flex;align-items:center;gap:26px;font-size:.93rem}
+  .nav-links a{text-decoration:none;color:#43544a;font-weight:550}
+  .nav-links a:hover{color:var(--forest)}
+  .nav .btn-sm{background:var(--forest);color:#fff;padding:9px 17px;border-radius:999px;font-size:.88rem;font-weight:650;text-decoration:none}
+  @media(max-width:820px){.nav-links a:not(.btn-sm){display:none}}
 
-  /* hero */
-  .hero{position:relative;overflow:hidden;background:linear-gradient(180deg,#eaf6ee,#f2f9f4)}
-  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;padding:64px 0 72px}
-  .eyebrow{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);color:var(--green-700);
-    font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:7px 13px;border-radius:999px}
-  h1{font-size:clamp(2rem,4.4vw,3.3rem);line-height:1.1;letter-spacing:-1px;margin:18px 0 14px;color:var(--green-900)}
-  h1 span{color:var(--green-700)}
-  .lede{font-size:1.08rem;color:var(--muted);max-width:46ch;margin:0 0 26px}
-  .cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
-  .btn{display:inline-flex;align-items:center;gap:9px;text-decoration:none;font-weight:650;font-size:.98rem;
-    padding:13px 22px;border-radius:999px;transition:transform .15s ease,box-shadow .15s ease}
-  .btn:hover{transform:translateY(-1px)}
-  .btn-primary{background:var(--green-700);color:#fff;box-shadow:0 8px 20px rgba(37,107,60,.28)}
-  .btn-ghost{background:#fff;color:var(--green-800);border:1px solid var(--line)}
-  .hero-shot{position:relative}
-  .hero-shot img{border-radius:24px;box-shadow:0 24px 60px rgba(18,53,31,.22);border:6px solid #fff}
-  .hero-badge{position:absolute;bottom:-18px;left:-14px;background:#fff;border-radius:14px;padding:12px 16px;box-shadow:var(--shadow);
-    display:flex;gap:11px;align-items:center;font-size:.86rem;font-weight:600;color:var(--green-800)}
-  .hero-badge em{display:block;font-style:normal;font-weight:500;color:var(--muted);font-size:.78rem}
-  @media(max-width:860px){.hero-grid{grid-template-columns:1fr;padding:44px 0 56px;gap:34px}.hero-badge{left:8px}}
+  /* ---------- hero ---------- */
+  .hero{position:relative;overflow:hidden;background:
+      radial-gradient(1100px 520px at 78% -10%,rgba(184,233,134,.20),transparent 60%),
+      radial-gradient(800px 500px at 8% 110%,rgba(63,157,92,.22),transparent 62%),
+      linear-gradient(168deg,var(--forest) 0%,#0a2315 100%);
+    color:#eaf3ea;padding:76px 0 96px}
+  .hero::after{content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1px);background-size:22px 22px;opacity:.5}
+  .hero-grid{position:relative;display:grid;grid-template-columns:1.06fr .94fr;gap:56px;align-items:center;z-index:2}
+  .pill{display:inline-flex;align-items:center;gap:9px;padding:8px 15px;border-radius:999px;
+    background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);
+    font-size:.76rem;font-weight:700;letter-spacing:.10em;text-transform:uppercase;color:#cfe9c4}
+  .pill .dot{width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 4px rgba(184,233,134,.18)}
+  h1{font-size:clamp(2.15rem,4.6vw,3.55rem);line-height:1.06;letter-spacing:-1.6px;margin:22px 0 18px;font-weight:800;color:#fff}
+  h1 em{font-style:normal;color:var(--lime)}
+  .lede{font-size:1.06rem;color:#b9cfbe;max-width:47ch;margin:0 0 30px}
+  .lede strong{color:#e9f4e6;font-weight:650}
+  .cta-row{display:flex;flex-wrap:wrap;gap:13px;align-items:center}
+  .btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;font-size:.98rem;
+    padding:14px 24px;border-radius:999px;transition:transform .16s ease,box-shadow .16s ease,background .16s ease}
+  .btn:hover{transform:translateY(-2px)}
+  .btn-solid{background:var(--lime);color:#12301d;box-shadow:0 12px 28px rgba(184,233,134,.26)}
+  .btn-outline{background:transparent;color:#e6f1e4;border:1px solid rgba(255,255,255,.28)}
+  .btn-outline:hover{background:rgba(255,255,255,.08)}
+  .hero-stats{display:flex;flex-wrap:wrap;gap:26px;margin-top:40px;padding-top:26px;border-top:1px solid rgba(255,255,255,.13)}
+  .hero-stats b{display:block;font-size:1.32rem;color:#fff;letter-spacing:-.5px}
+  .hero-stats span{font-size:.8rem;color:#9fb8a6;letter-spacing:.03em}
 
-  /* sections */
-  section{padding:74px 0}
-  .sec-head{max-width:60ch;margin-bottom:36px}
-  h2{font-size:clamp(1.5rem,2.6vw,2.1rem);letter-spacing:-.6px;margin:0 0 10px;color:var(--green-900)}
-  .sec-head p{margin:0;color:var(--muted)}
-  .kicker{font-size:.78rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--green-500);margin-bottom:10px}
+  /* phone mockup */
+  .phone-wrap{position:relative;display:flex;justify-content:center}
+  .phone{position:relative;width:min(300px,74vw);border-radius:38px;padding:11px;background:linear-gradient(160deg,#26402f,#101f16);
+    box-shadow:var(--shadow-lg),inset 0 0 0 1px rgba(255,255,255,.10)}
+  .phone img{border-radius:29px;aspect-ratio:9/16.5;object-fit:cover;width:100%}
+  .phone::before{content:"";position:absolute;top:20px;left:50%;transform:translateX(-50%);width:74px;height:6px;border-radius:99px;background:rgba(0,0,0,.45);z-index:3}
+  .float{position:absolute;background:rgba(255,255,255,.96);color:var(--forest);border-radius:14px;padding:11px 15px;
+    box-shadow:0 16px 34px rgba(0,0,0,.22);font-size:.82rem;font-weight:700;display:flex;gap:10px;align-items:center;z-index:4}
+  .float small{display:block;font-weight:550;color:var(--muted);font-size:.72rem;letter-spacing:.02em}
+  .float.f1{top:14%;left:-6%}
+  .float.f2{bottom:12%;right:-4%}
+  .float .ic{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:#eaf6e2;font-size:.95rem}
+  @media(max-width:900px){
+    .hero-grid{grid-template-columns:1fr;gap:44px;text-align:left}
+    .hero{padding:54px 0 72px}
+    .float.f1{left:-2%}.float.f2{right:-2%}
+  }
 
-  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(248px,1fr));gap:20px}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow)}
-  .card .ico{width:42px;height:42px;border-radius:12px;background:var(--green-200);display:grid;place-items:center;font-size:1.25rem;margin-bottom:14px}
-  .card h3{margin:0 0 7px;font-size:1.05rem;color:var(--green-900)}
-  .card p{margin:0;color:var(--muted);font-size:.94rem}
+  /* ---------- strips ---------- */
+  .strip{background:var(--paper);border-bottom:1px solid var(--line)}
+  .strip .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:22px 0}
+  .strip div{text-align:center;padding:6px 10px;border-right:1px solid var(--line)}
+  .strip div:last-child{border-right:0}
+  .strip b{display:block;color:var(--forest);font-size:1.05rem;letter-spacing:-.3px}
+  .strip span{font-size:.8rem;color:var(--muted)}
+  @media(max-width:720px){.strip .wrap{grid-template-columns:repeat(2,1fr);gap:14px}.strip div:nth-child(2){border-right:0}}
 
-  .shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px}
-  .shot{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+  /* ---------- sections ---------- */
+  section{padding:82px 0}
+  .head{max-width:62ch;margin-bottom:44px}
+  .kicker{display:inline-block;font-size:.75rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--leaf-2);margin-bottom:12px}
+  h2{font-size:clamp(1.6rem,2.9vw,2.35rem);letter-spacing:-1px;line-height:1.14;margin:0 0 12px;color:var(--forest);font-weight:800}
+  .head p{margin:0;color:var(--muted);font-size:1.02rem}
+
+  .grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+  .feat{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);padding:26px 24px;box-shadow:var(--shadow-sm);
+    transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+  .feat:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:#d6e3d2}
+  .feat .ic{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;margin-bottom:16px;
+    background:linear-gradient(150deg,#eaf6e2,#d8ecd0);color:#26623f}
+  .feat h3{margin:0 0 8px;font-size:1.05rem;color:var(--forest);letter-spacing:-.2px}
+  .feat p{margin:0;color:var(--muted);font-size:.93rem}
+  .feat .tag{display:inline-block;margin-top:14px;font-size:.72rem;font-weight:750;letter-spacing:.06em;text-transform:uppercase;
+    color:#2f7d4f;background:#eef7e9;border-radius:999px;padding:5px 10px}
+
+  /* nursery cards */
+  .plants{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px}
+  .plant{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-sm);
+    transition:transform .18s ease,box-shadow .18s ease}
+  .plant:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
+  .plant .ph{position:relative;aspect-ratio:4/3;overflow:hidden;background:#dfe9dc}
+  .plant .ph img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+  .plant:hover .ph img{transform:scale(1.06)}
+  .plant .cat{position:absolute;top:11px;left:11px;background:rgba(255,255,255,.94);color:#2b5540;font-size:.7rem;font-weight:750;
+    letter-spacing:.05em;text-transform:uppercase;padding:5px 10px;border-radius:999px}
+  .plant .body{padding:16px 18px 19px}
+  .plant h3{margin:0 0 2px;font-size:1rem;color:var(--forest);letter-spacing:-.2px}
+  .plant .hi{font-size:.82rem;color:#8a9a90;margin-bottom:10px}
+  .plant .row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .price{font-weight:800;color:var(--forest);font-size:1.05rem}
+  .rating{font-size:.82rem;color:var(--gold);font-weight:700}
+  .plant .meta{display:flex;gap:12px;margin-top:10px;font-size:.76rem;color:#7c8b82}
+
+  /* steps */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;position:relative}
+  .steps::before{content:"";position:absolute;top:27px;left:12%;right:12%;height:2px;
+    background:repeating-linear-gradient(90deg,#cfe0c8 0 8px,transparent 8px 16px)}
+  .step{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);padding:26px 22px;box-shadow:var(--shadow-sm)}
+  .step .n{position:relative;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;margin-bottom:16px;
+    background:var(--forest);color:var(--lime);font-weight:800;box-shadow:0 0 0 6px var(--cream)}
+  .step h3{margin:0 0 7px;font-size:1.02rem;color:var(--forest)}
+  .step p{margin:0;font-size:.92rem;color:var(--muted)}
+  @media(max-width:820px){.steps{grid-template-columns:1fr}.steps::before{display:none}}
+
+  /* gallery */
+  .gallery{background:var(--paper);border-block:1px solid var(--line)}
+  .shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:24px}
+  .shot{border-radius:var(--r-lg);overflow:hidden;background:var(--cream);border:1px solid var(--line);box-shadow:var(--shadow-sm)}
   .shot img{aspect-ratio:4/3;object-fit:cover;width:100%}
-  .shot div{padding:16px 18px}
-  .shot h3{margin:0 0 4px;font-size:1rem;color:var(--green-900)}
-  .shot p{margin:0;font-size:.88rem;color:var(--muted)}
+  .shot .cap{padding:16px 19px 20px}
+  .shot h3{margin:0 0 4px;font-size:.99rem;color:var(--forest)}
+  .shot p{margin:0;font-size:.87rem;color:var(--muted)}
 
-  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px;counter-reset:s}
-  .step{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px;position:relative}
-  .step::before{counter-increment:s;content:counter(s);position:absolute;top:-14px;left:22px;width:30px;height:30px;border-radius:50%;
-    background:var(--green-700);color:#fff;display:grid;place-items:center;font-weight:700;font-size:.85rem}
-  .step h3{margin:8px 0 6px;font-size:1rem;color:var(--green-900)}
-  .step p{margin:0;font-size:.9rem;color:var(--muted)}
-
-  .band{background:var(--green-900);color:#eaf6ee}
+  /* dark band */
+  .band{background:
+      radial-gradient(900px 400px at 85% 0%,rgba(184,233,134,.14),transparent 60%),
+      linear-gradient(170deg,#0d2b1a,#0a2114);color:#dfeadf}
   .band h2{color:#fff}
-  .band .sec-head p{color:#b9d6c4}
-  .band .card{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.14);box-shadow:none}
-  .band .card h3{color:#fff}
-  .band .card p{color:#b9d6c4}
-  .band .card .ico{background:rgba(255,255,255,.12)}
+  .band .head p{color:#a8c0ae}
+  .band .kicker{color:var(--lime)}
+  .band .feat{background:rgba(255,255,255,.055);border-color:rgba(255,255,255,.12);box-shadow:none}
+  .band .feat h3{color:#fff}
+  .band .feat p{color:#a8c0ae}
+  .band .feat .ic{background:rgba(255,255,255,.10);color:var(--lime)}
+  .stack{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px}
+  .chip{display:flex;align-items:center;gap:12px;padding:15px 17px;border-radius:var(--r-md);
+    background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.12);font-size:.9rem;color:#dbe8db}
+  .chip b{display:block;color:#fff;font-size:.95rem;letter-spacing:-.1px}
+  .chip span{font-size:.78rem;color:#9cb3a3}
+  .chip .k{width:36px;height:36px;border-radius:10px;background:rgba(184,233,134,.14);display:grid;place-items:center;color:var(--lime);font-weight:800;font-size:.85rem}
 
-  footer{background:#0e2a19;color:#9dbcaa;padding:44px 0;font-size:.9rem}
-  footer a{color:#cfe8d7}
-  .foot{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center}
-  .note{font-size:.8rem;color:#7fa08c;margin-top:18px;max-width:70ch}
+  /* faq */
+  .faq{max-width:820px;margin-inline:auto}
+  details{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-md);padding:16px 20px;margin-bottom:12px;box-shadow:var(--shadow-sm)}
+  details[open]{box-shadow:var(--shadow-md)}
+  summary{cursor:pointer;font-weight:700;color:var(--forest);font-size:.98rem;list-style:none;display:flex;justify-content:space-between;gap:16px;align-items:center}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";font-weight:700;color:var(--leaf-2);font-size:1.2rem;line-height:1}
+  details[open] summary::after{content:"–"}
+  details p{margin:12px 0 0;color:var(--muted);font-size:.93rem}
+
+  /* final cta + footer */
+  .final{padding:0 0 84px}
+  .cta-card{position:relative;overflow:hidden;border-radius:30px;padding:52px 44px;color:#fff;
+    background:radial-gradient(700px 340px at 82% -20%,rgba(184,233,134,.26),transparent 62%),linear-gradient(160deg,#123a24,#0a2315);
+    box-shadow:var(--shadow-md);display:grid;grid-template-columns:1.3fr .7fr;gap:30px;align-items:center}
+  .cta-card h2{color:#fff;margin-bottom:10px}
+  .cta-card p{color:#b9cfbe;margin:0 0 24px;max-width:48ch}
+  .cta-card .acts{display:flex;flex-wrap:wrap;gap:12px}
+  @media(max-width:820px){.cta-card{grid-template-columns:1fr;padding:38px 26px}}
+
+  footer{background:#081a10;color:#8fa898;padding:46px 0 34px;font-size:.89rem}
+  footer a{color:#cfe4cf;text-decoration:none}
+  footer a:hover{text-decoration:underline}
+  .foot{display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:flex-start}
+  .foot .brand{color:#e6f1e6;font-size:.98rem}
+  .foot .cols{display:flex;gap:44px;flex-wrap:wrap}
+  .foot h4{margin:0 0 10px;font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;color:#6f8a7a;font-weight:800}
+  .foot ul{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+  .legal{margin-top:32px;padding-top:20px;border-top:1px solid rgba(255,255,255,.10);color:#6f8a7a;font-size:.8rem;max-width:78ch}
 </style>
 </head>
 <body>
 
 <header>
   <div class="wrap nav">
-    <a class="brand" href="#top"><img src="https://raw.githubusercontent.com/rewpal5-dotcom/Sourav-Baghel/main/app/src/main/res/drawable/img_paud_pandit_icon.jpg" alt="Paud Pandit icon"> Paud Pandit</a>
-    <nav>
+    <a class="brand" href="#top"><img src="https://raw.githubusercontent.com/rewpal5-dotcom/Sourav-Baghel/main/app/src/main/res/drawable/img_paud_pandit_icon.jpg" alt="Paud Pandit app icon"> Paud Pandit</a>
+    <div class="nav-links">
       <a href="#features">Features</a>
-      <a href="#screens">Inside the app</a>
-      <a href="#how">How it works</a>
-      <a href="#tech">Tech</a>
-      <a href="#contact">Contact</a>
-    </nav>
+      <a href="#nursery">Nursery</a>
+      <a href="#how">Kaise chalta hai</a>
+      <a href="#gallery">Screens</a>
+      <a href="#faq">FAQ</a>
+      <a class="btn-sm" href="#contact">App chahiye</a>
+    </div>
   </div>
 </header>
 
@@ -129,138 +236,251 @@
   <div class="hero">
     <div class="wrap hero-grid">
       <div>
-        <span class="eyebrow">🌿 Android app · AI Plant Doctor</span>
-        <h1>Your plants ka <span>AI doctor</span> aur apna nursery</h1>
-        <p class="lede">Paud Pandit ek Android app hai — patte ki photo lo, AI bimari pehchan kar ilaaj batata hai; saath hi healthy indoor plants, pots aur soil mix kharido, aur <strong>Mera Bagicha</strong> mein apne paudhon ka care schedule sambhalo.</p>
-        <div class="cta">
-          <a class="btn btn-primary" href="#contact">Get the app</a>
-          <a class="btn btn-ghost" href="#features">See features</a>
+        <span class="pill"><span class="dot"></span> Android app · AI plant doctor</span>
+        <h1>Paudhon ka doctor, <em>aapki jeb</em> mein</h1>
+        <p class="lede">Patte ki ek photo lo — AI bimari pehchan kar ilaaj batata hai. Saath hi nursery se healthy plants kharido, aur <strong>Mera Bagicha</strong> mein har paudhe ka watering schedule yaad rakho.</p>
+        <div class="cta-row">
+          <a class="btn btn-solid" href="#contact">App ke baare mein poochho</a>
+          <a class="btn btn-outline" href="#features">Features dekho</a>
+        </div>
+        <div class="hero-stats">
+          <div><b>5 screens</b><span>Doctor · Nursery · Bagicha · Chat</span></div>
+          <div><b>8 paudhe</b><span>₹149 se shuru</span></div>
+          <div><b>Offline garden</b><span>Data device par hi</span></div>
         </div>
       </div>
-      <div class="hero-shot">
-        <img src="https://raw.githubusercontent.com/rewpal5-dotcom/Sourav-Baghel/main/app/src/main/res/drawable/img_plant_hero.jpg" alt="Paud Pandit app hero — healthy green plants">
-        <div class="hero-badge">🩺 <span>AI Leaf Disease Scanner<em>Photo se diagnosis, seconds mein</em></span></div>
+      <div class="phone-wrap">
+        <div class="phone">
+          <img src="https://raw.githubusercontent.com/rewpal5-dotcom/Sourav-Baghel/main/app/src/main/res/drawable/img_plant_doctor.jpg" alt="Paud Pandit app ka plant doctor screen">
+        </div>
+        <div class="float f1"><span class="ic">🩺</span><span>AI diagnosis<small>Confidence ke saath</small></span></div>
+        <div class="float f2"><span class="ic">💧</span><span>Watering due<small>Tulsi · aaj</small></span></div>
       </div>
+    </div>
+  </div>
+
+  <div class="strip">
+    <div class="wrap">
+      <div><b>AI Leaf Scanner</b><span>Photo se bimari detection</span></div>
+      <div><b>Nursery + Cart</b><span>Plants, pots, soil mix</span></div>
+      <div><b>Mera Bagicha</b><span>Care schedule aur reminders</span></div>
+      <div><b>Pandit Ji Chat</b><span>Gardening sawaal, turant jawab</span></div>
     </div>
   </div>
 
   <section id="features">
     <div class="wrap">
-      <div class="sec-head">
-        <div class="kicker">Features</div>
+      <div class="head">
+        <span class="kicker">Features</span>
         <h2>Ek app mein doctor, nursery aur mali</h2>
-        <p>Char cheezein jo roz kaam aati hain — bimari pehchanna, paudhe kharidna, care yaad rakhna, aur expert se poochna.</p>
+        <p>Roz kaam aane wale chaar kaam — bimari pehchanna, paudhe kharidna, care yaad rakhna, aur expert se poochna. Sab ek jagah, Hindi aur English dono mein.</p>
       </div>
-      <div class="cards">
-        <div class="card">
-          <div class="ico">🩺</div>
+      <div class="grid-4">
+        <div class="feat">
+          <div class="ic">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-7-10a4 4 0 0 1 7-2.65A4 4 0 0 1 19 11c0 5.65-7 10-7 10z"/></svg>
+          </div>
           <h3>AI Plant Doctor</h3>
           <p>Camera ya gallery se patte ki photo lo. App disease pehchanta hai, confidence score dikhata hai aur step-by-step upay deta hai.</p>
+          <span class="tag">Gemini AI</span>
         </div>
-        <div class="card">
-          <div class="ico">🪴</div>
+        <div class="feat">
+          <div class="ic">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1.6"/><circle cx="18" cy="20" r="1.6"/><path d="M6 6 5 3H2"/></svg>
+          </div>
           <h3>Nursery &amp; Cart</h3>
-          <p>Indoor, flowering, medicinal aur fruit plants — price ke saath. Search karo, cart bharo, order ready karo.</p>
+          <p>Indoor, flowering, medicinal aur fruit plants — rating aur price ke saath. Search karo, cart bharo, order ready karo.</p>
+          <span class="tag">8 plants</span>
         </div>
-        <div class="card">
-          <div class="ico">🌱</div>
+        <div class="feat">
+          <div class="ic">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12"/><path d="M12 12c0-4 3-7 8-7 0 5-3.5 7-8 7z"/><path d="M12 15c0-3-2.2-5-6-5 0 3.6 2.6 5 6 5z"/></svg>
+          </div>
           <h3>Mera Bagicha</h3>
-          <p>Apne paudhe add karo, watering schedule (har kitne din) set karo, aur "Need Water Today" list roz dekho.</p>
+          <p>Apne paudhe add karo, "har kitne din paani" set karo, aur roz ki "Need Water Today" list dekho.</p>
+          <span class="tag">Offline · Room DB</span>
         </div>
-        <div class="card">
-          <div class="ico">💬</div>
+        <div class="feat">
+          <div class="ic">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 21l1.9-5.4A8 8 0 1 1 21 12z"/></svg>
+          </div>
           <h3>Pandit Ji Chat</h3>
-          <p>Gardening ka koi bhi sawaal — "yellow leaves kyun", "organic potting soil kaise banaye" — Hindi/English mein poochho.</p>
+          <p>"Yellow leaves kyun ho rahe hain?", "Organic potting soil kaise banayein?" — koi bhi sawaal, seedha jawab.</p>
+          <span class="tag">Hindi + English</span>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="screens" style="background:#fff;border-block:1px solid var(--line)">
+  <section id="nursery" style="background:#fff;border-block:1px solid var(--line)">
     <div class="wrap">
-      <div class="sec-head">
-        <div class="kicker">Inside the app</div>
-        <h2>Scan, diagnose, phir care</h2>
-        <p>Simple flow: photo lo → AI analysis → upay, aur paudha apne bagiche mein add ho jaata hai.</p>
+      <div class="head">
+        <span class="kicker">Nursery</span>
+        <h2>App ke andar ka nursery</h2>
+        <p>Ye wahi paudhe hain jo app mein already hain — naam, Hindi naam, price, rating, care level aur watering days ke saath.</p>
       </div>
-      <div class="shots">
-        <div class="shot">
-          <img loading="lazy" src="<img src="https://raw.githubusercontent.com/rewpal5-dotcom/Sourav-Baghel/main/app/src/main/res/drawable/img_plant_doctor.jpg" alt="Plant doctor scan screen">"
-          <div><h3>AI Leaf Disease Scanner</h3><p>Capture leaf photo, "Analyze &amp; Diagnose with AI" dabao.</p></div>
-        </div>
-        <div class="shot">
-          <img loading="lazy" src="https://raw.githubusercontent.com/rewpal5-dotcom/Sourav-Baghel/main/app/src/main/res/drawable/img_indoor_plants.jpg" alt="Indoor plants in the nursery">
-          <div><h3>Nursery picks</h3><p>Air-purifying indoor plants, pots aur soil mixes.</p></div>
-        </div>
-        <div class="shot">
-          <img loading="lazy" src="https://raw.githubusercontent.com/rewpal5-dotcom/Sourav-Baghel/main/app/src/main/res/drawable/img_paud_pandit_icon.jpg" alt="Paud Pandit app icon">
-          <div><h3>Paud Pandit</h3><p>Ek hi jagah doctor, nursery aur mali ki salah.</p></div>
-        </div>
+      <div class="plants">
+        <article class="plant">
+          <div class="ph"><img loading="lazy" src="https://raw.githubusercontent.com/rewpal5-dotcom/Sourav-Baghel/main/app/src/main/res/drawable/img_indoor_plants.jpg" alt="Monstera Deliciosa"><span class="cat">Indoor</span></div>
+          <div class="body"><h3>Monstera Deliciosa</h3><div class="hi">Swiss Cheese Plant</div>
+            <div class="row"><span class="price">₹499</span><span class="rating">★ 4.8</span></div>
+            <div class="meta"><span>💧 7 din</span><span>☀️ Bright indirect</span><span>Easy</span></div></div>
+        </article>
+        <article class="plant">
+          <div class="ph"><img loading="lazy" src="https://raw.githubusercontent.com/rewpal5-dotcom/Sourav-Baghel/main/app/src/main/res/drawable/img_plant_hero.jpg" alt="Snake Plant"><span class="cat">Air purifying</span></div>
+          <div class="body"><h3>Snake Plant</h3><div class="hi">Nag Phani Paudha</div>
+            <div class="row"><span class="price">₹299</span><span class="rating">★ 4.9</span></div>
+            <div class="meta"><span>💧 14 din</span><span>☀️ Low light</span><span>Easy</span></div></div>
+        </article>
+        <article class="plant">
+          <div class="ph"><img loading="lazy" src="https://raw.githubusercontent.com/rewpal5-dotcom/Sourav-Baghel/main/app/src/main/res/drawable/img_indoor_plants.jpg" alt="Peace Lily"><span class="cat">Flowering</span></div>
+          <div class="body"><h3>Peace Lily</h3><div class="hi">Shanti Paudha</div>
+            <div class="row"><span class="price">₹349</span><span class="rating">★ 4.7</span></div>
+            <div class="meta"><span>💧 4 din</span><span>☀️ Medium indirect</span><span>Medium</span></div></div>
+        </article>
+        <article class="plant">
+          <div class="ph"><img loading="lazy" src="https://raw.githubusercontent.com/rewpal5-dotcom/Sourav-Baghel/main/app/src/main/res/drawable/img_plant_hero.jpg" alt="Tulsi"><span class="cat">Medicinal</span></div>
+          <div class="body"><h3>Tulsi</h3><div class="hi">Pavitra Tulsi</div>
+            <div class="row"><span class="price">₹149</span><span class="rating">★ 5.0</span></div>
+            <div class="meta"><span>💧 2 din</span><span>☀️ Direct sun</span><span>Easy</span></div></div>
+        </article>
       </div>
     </div>
   </section>
 
   <section id="how">
     <div class="wrap">
-      <div class="sec-head">
-        <div class="kicker">How it works</div>
+      <div class="head">
+        <span class="kicker">Kaise chalta hai</span>
         <h2>Teen step mein shuru</h2>
+        <p>Koi setup nahi, koi login nahi. App kholo aur seedha kaam par lage.</p>
       </div>
       <div class="steps">
-        <div class="step"><h3>Photo lo</h3><p>Bimari wale patte ki clear photo camera se lo ya gallery se chuno.</p></div>
-        <div class="step"><h3>AI diagnosis</h3><p>App plant ki bimari, care level aur ilaaj batata hai — confidence ke saath.</p></div>
-        <div class="step"><h3>Bagicha mein add karo</h3><p>Paudha Mera Bagicha mein chala jaata hai, watering reminder ke saath.</p></div>
+        <div class="step"><div class="n">1</div><h3>Photo lo</h3><p>Bimari wale patte ki clear photo camera se lo, ya gallery se chuno.</p></div>
+        <div class="step"><div class="n">2</div><h3>AI diagnosis</h3><p>App bimari, care level aur ilaaj batata hai — confidence ke saath, aasan bhasha mein.</p></div>
+        <div class="step"><div class="n">3</div><h3>Bagicha mein add karo</h3><p>Paudha Mera Bagicha mein chala jaata hai, watering reminder ke saath. Bhoolna band.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery" class="gallery">
+    <div class="wrap">
+      <div class="head">
+        <span class="kicker">Screens</span>
+        <h2>Andar se kaisa dikhta hai</h2>
+        <p>Simple flow — scan, diagnose, phir care. Har screen ek hi kaam par focus karti hai.</p>
+      </div>
+      <div class="shots">
+        <div class="shot">
+          <img loading="lazy" src="https://raw.githubusercontent.com/rewpal5-dotcom/Sourav-Baghel/main/app/src/main/res/drawable/img_plant_doctor.jpg" alt="Plant doctor screen">
+          <div class="cap"><h3>AI Leaf Disease Scanner</h3><p>Leaf capture karo, "Analyze &amp; Diagnose with AI" dabao — result confidence % ke saath.</p></div>
+        </div>
+        <div class="shot">
+          <img loading="lazy" src="https://raw.githubusercontent.com/rewpal5-dotcom/Sourav-Baghel/main/app/src/main/res/drawable/img_indoor_plants.jpg" alt="Nursery plants">
+          <div class="cap"><h3>Nursery picks</h3><p>Air-purifying indoor plants, pots aur soil mixes — cart ek tap mein.</p></div>
+        </div>
+        <div class="shot">
+          <img loading="lazy" src="https://raw.githubusercontent.com/rewpal5-dotcom/Sourav-Baghel/main/app/src/main/res/drawable/img_paud_pandit_icon.jpg" alt="Paud Pandit icon">
+          <div class="cap"><h3>Paud Pandit</h3><p>Ek hi jagah doctor, nursery aur mali ki salah — bilkul free.</p></div>
+        </div>
       </div>
     </div>
   </section>
 
   <section id="tech" class="band">
     <div class="wrap">
-      <div class="sec-head">
-        <div class="kicker" style="color:#8fd3a6">Under the hood</div>
+      <div class="head">
+        <span class="kicker">Under the hood</span>
         <h2>Kotlin, Compose aur Gemini</h2>
-        <p>Native Android app — Jetpack Compose UI, Room database offline data ke liye, aur Gemini AI diagnosis ke liye.</p>
+        <p>Native Android app — Material 3 UI, offline data ke liye Room, aur diagnosis ke liye Gemini AI. Code GitHub par public hai.</p>
       </div>
-      <div class="cards">
-        <div class="card"><div class="ico">🧩</div><h3>Jetpack Compose</h3><p>Material 3 UI, single-activity architecture.</p></div>
-        <div class="card"><div class="ico">🗄️</div><h3>Room</h3><p>Garden aur plant data device par hi, offline.</p></div>
-        <div class="card"><div class="ico">✨</div><h3>Gemini AI</h3><p>Server-side API key, leaf photo analysis aur chat.</p></div>
-        <div class="card"><div class="ico">📱</div><h3>Android 7.0+</h3><p>minSdk 24, targetSdk 36 — purane phones par bhi chalta hai.</p></div>
+      <div class="stack">
+        <div class="chip"><span class="k">K</span><span><b>Kotlin 2.2</b>Jetpack Compose UI</span></div>
+        <div class="chip"><span class="k">R</span><span><b>Room 2.7</b>Garden data offline</span></div>
+        <div class="chip"><span class="k">G</span><span><b>Gemini AI</b>Leaf analysis + chat</span></div>
+        <div class="chip"><span class="k">A</span><span><b>Android 7.0+</b>minSdk 24 · targetSdk 36</span></div>
       </div>
     </div>
   </section>
 
-  <section id="contact">
+  <section id="faq">
     <div class="wrap">
-      <div class="sec-head">
-        <div class="kicker">Contact</div>
-        <h2>App chahiye ya sawaal hai?</h2>
-        <p>Project ka code GitHub par public hai. App install link aur contact details niche.</p>
+      <div class="head" style="text-align:center;margin-inline:auto">
+        <span class="kicker">FAQ</span>
+        <h2>Aksar poochhe jaane wale sawaal</h2>
       </div>
-      <div class="cards">
-        <div class="card">
-          <div class="ico">💻</div>
-          <h3>Source code</h3>
-          <p><a href="https://github.com/rewpal5-dotcom/Sourav-Baghel">github.com/rewpal5-dotcom/Sourav-Baghel</a></p>
-        </div>
-        <div class="card">
-          <div class="ico">📞</div>
-          <h3>Phone / WhatsApp</h3>
-          <p id="phone-line">Number add karna hai — bataiye kaunsa number yahan dikhana hai.</p>
-        </div>
+      <div class="faq">
+        <details open>
+          <summary>App free hai?</summary>
+          <p>Haan. App free hai aur aapka garden data aapke phone mein hi rehta hai. Sirf AI diagnosis ke liye internet chahiye.</p>
+        </details>
+        <details>
+          <summary>Kya app offline chalta hai?</summary>
+          <p>Nursery browse karna, Mera Bagicha aur watering schedule offline chalte hain. AI doctor aur Pandit Ji chat ke liye internet zaroori hai.</p>
+        </details>
+        <details>
+          <summary>AI diagnosis kitna sahi hota hai?</summary>
+          <p>App har result ke saath confidence score dikhata hai. Ye salah hai, doctor nahi — serious bimari mein nursery expert se bhi pooch lein.</p>
+        </details>
+        <details>
+          <summary>App kaise milega?</summary>
+          <p>Abhi app ka APK build ho raha hai. Neeche diye number par message karein, install link bhej diya jayega. Code GitHub par public hai.</p>
+        </details>
       </div>
     </div>
   </section>
+
+  <div class="final" id="contact">
+    <div class="wrap">
+      <div class="cta-card">
+        <div>
+          <h2>Apne paudhon ka doctor aaj hi</h2>
+          <p>App install link, demo ya kisi bhi sawaal ke liye message karein. Source code bhi GitHub par hai — koi bhi dekh sakta hai.</p>
+          <div class="acts">
+            <a class="btn btn-solid" href="https://github.com/rewpal5-dotcom/Sourav-Baghel">GitHub par dekho</a>
+            <a class="btn btn-outline" href="#top">Upar chalo</a>
+          </div>
+        </div>
+        <div>
+          <div class="chip" style="background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.16)"><span class="k">📞</span><span><b>Contact</b>Number jald hi</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </main>
 
 <footer>
   <div class="wrap">
     <div class="foot">
-      <div>© <span id="yr">2026</span> Paud Pandit · Made in India 🌿</div>
-      <div><a href="https://github.com/rewpal5-dotcom/Sourav-Baghel">GitHub</a> · <a href="#top">Back to top</a></div>
+      <div>
+        <div class="brand" style="display:flex;align-items:center;gap:9px;font-weight:750">
+          <img src="https://raw.githubusercontent.com/rewpal5-dotcom/Sourav-Baghel/main/app/src/main/res/drawable/img_paud_pandit_icon.jpg" alt="" style="width:28px;height:28px;border-radius:8px">
+          Paud Pandit
+        </div>
+        <p style="margin:10px 0 0;max-width:34ch;color:#7f9a89">AI plant doctor aur nursery app — paudhon ki care aasan banane ke liye, Made in India.</p>
+      </div>
+      <div class="cols">
+        <div>
+          <h4>App</h4>
+          <ul>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#nursery">Nursery</a></li>
+            <li><a href="#how">Kaise chalta hai</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Project</h4>
+          <ul>
+            <li><a href="https://github.com/rewpal5-dotcom/Sourav-Baghel">Source code</a></li>
+            <li><a href="https://github.com/rewpal5-dotcom/Sourav-Baghel/blob/main/README.md">README</a></li>
+            <li><a href="https://github.com/rewpal5-dotcom/Sourav-Baghel/issues">Issues</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
-    <p class="note">Paud Pandit ek Android app hai. Is page par diye gaye diagnosis suggestions AI se aate hain — serious plant disease ke liye kisi nursery expert se salah lein.</p>
+    <p class="legal">© <span id="yr">2026</span> Paud Pandit. AI se mili salah jaankari ke liye hai — serious bimari mein nursery expert ya krishi salah kendra se confirm karein. Is page par dikhaye gaye paudhe app ke sample nursery data se hain.</p>
   </div>
   <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
 </footer>
